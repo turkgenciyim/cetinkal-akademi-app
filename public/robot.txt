@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://akademi.sigortamglobal.com/
+
+# Sitemaps
+Sitemap: https://akademi.sigortamglobal.com/sitemap.xml
