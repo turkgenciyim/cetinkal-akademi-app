@@ -15,7 +15,7 @@ export const revalidate = 10;
 
 export default async function Pages({ params }) {
   const blog = await getSingleBlog(params.slug);
-
+ 
 
   if (!blog) {
     notFound();
