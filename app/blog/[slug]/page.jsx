@@ -1,32 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import { getSingleBlog, getBlogs } from "@/app/utils/ghost";
 import { notFound } from "next/navigation";
 import { formatDistance, subDays } from "date-fns";
 import { tr } from "date-fns/locale";
-export async function generateMetadata({ params: { slug } }) {
-  const metaData = await getSingleBlog(slug);
 
-  let tags = metaData?.tags.map((item) => item.name);
-  return {
-    title: metaData.title,
-    description: metaData.description,
-    keywords: tags,
-    openGraph: {
-      title: metaData.title,
-      description: metaData.excpet,
-      url: metaData.url,
-      keywords: tags,
-      images: [
-        {
-          url: metaData.feature_image,
-        },
-      ],
-      locale: metaData.locale,
-      type: "website",
-    },
-  };
-}
 
 export async function generateStaticParams() {
   const posts = await getBlogs();
@@ -38,11 +15,7 @@ export const revalidate = 10;
 
 export default async function Pages({ params }) {
   const blog = await getSingleBlog(params.slug);
-  const time = formatDistance(
-    subDays(new Date(blog.created_at), 1),
-    new Date(),
-    { locale: tr, addSuffix: true }
-  );
+
 
   if (!blog) {
     notFound();
