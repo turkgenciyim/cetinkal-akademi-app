@@ -36,3 +36,14 @@ export async function getBlogs() {
       throw new Error(err);
     });
 }
+
+export async function getSitemapBlogs() {
+  return await api.posts
+    .browse({
+      fields: "slug,updated_at",
+      limit: 10,
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
+}
