@@ -1,4 +1,4 @@
-import '../../blog.css'
+import '@/app/blog.css'
 
 import Image from 'next/image'
 import { getSingleBlog, getBlogs } from '@/app/utils/ghost'
@@ -16,6 +16,7 @@ export const revalidate = 10
 
 export default async function Pages ({ params }) {
   const blog = await getSingleBlog(params.slug)
+  console.log(params)
 
   if (!blog) {
     notFound()

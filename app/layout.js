@@ -1,13 +1,17 @@
 import './globals.css'
-import { Lato } from 'next/font/google'
+import { Lato, DM_Sans } from 'next/font/google'
 import ScrollButton from './ScrollButton'
 import Link from 'next/link'
-import { GeistSans } from 'geist/font'
 
 const lato = Lato({
   subsets: ['latin'],
   weight: ['100', '300', '400', '700', '900'],
   variable: '--font-lato'
+})
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-dm-sans'
 })
 
 export const metadata = {
@@ -53,8 +57,9 @@ export default function RootLayout ({ children }) {
           href='/favicon-16x16.png'
         />
         <link rel='manifest' href='/site.webmanifest' />
+        <link rel='icon' href='/favicon.ico' />
       </head>
-      <body className={`${GeistSans.className} ${lato.variable}`}>
+      <body className={`${dmSans.className} ${lato.variable}`}>
         <ScrollButton />
         <nav
           className='
