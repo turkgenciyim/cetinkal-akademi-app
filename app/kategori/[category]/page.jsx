@@ -4,6 +4,7 @@ import { formatDistance, subDays } from 'date-fns'
 import { tr } from 'date-fns/locale'
 import Image from 'next/image'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import React from 'react'
 
 export const revalidate = 10
@@ -11,23 +12,15 @@ export const revalidate = 10
 export default async function Page ({ params: { category } }) {
   const blogs = await getBlogs(category)
 
+  if (!blogs) {
+    notFound()
+  }
+
   return (
     <section>
-      <div className='z-10 mb-12'>
-        <div className='relative w-full overflow-hidden -z-10 h-96'>
-          <Image
-            src={blogs[0].tags[0].feature_image}
-            fill
-            sizes='(max-width: 768px) 100vw,
-            (max-width: 1200px) 30vw, 20vw
-            (max-width: 1980px) 60vw, 50vw
-            '
-            className='object-cover object-center scale-110 blur-sm'
-            alt={`${blogs[0].tags[0].name}`}
-          />
-        </div>
-        <h1 className='z-20 max-w-xl px-12 py-8 mx-auto -mt-24 text-3xl font-black tracking-tight text-center bg-white/80 backdrop-blur-md rounded-t-xl md:max-w-2xl lg:max-w-3xl xs:text-4xl md:text-5xl lg:text-6xl font-lato'>
-          {blogs[0].tags[0].name}
+      <div className='z-10 my-12'>
+        <h1 className='z-20 max-w-xl mx-auto text-3xl font-black tracking-tight text-center bg-white/80 backdrop-blur-md rounded-t-xl md:max-w-2xl lg:max-w-3xl xs:text-4xl md:text-5xl lg:text-6xl font-lato'>
+          {blogs[0]?.tags[0]?.name}
         </h1>
       </div>
       <div className='grid p-4  max-w-7xl grid-cols-[repeat(auto-fill,minmax(320px,1fr))] mx-auto gap-4'>

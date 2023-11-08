@@ -23,7 +23,7 @@ export async function getCategories (category) {
 export async function getBlogsByTag (category) {
   return await api.tags
     .browse({
-      order: 'slug ASC',
+      order: 'slug ASC'
       // filter: `tags:[yangin-sigortasi]`
     })
     .catch(err => {
@@ -36,8 +36,7 @@ export async function getBlogs (params) {
       fields:
         'slug,title,excerpt,feature_image,feature_image_caption,created_at',
       include: ['tags'],
-      filter: `tags:[${params ? params : ""}]`,
-      limit: 10
+      filter: `tags:[${params && params}]`
     })
     .catch(err => {
       throw new Error(err)

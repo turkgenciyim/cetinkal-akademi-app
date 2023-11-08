@@ -1,80 +1,96 @@
-import ImageBanner from '@/app/components/ImageBanner.component'
-import { getBlogs, getCategories } from '@/app/utils/ghost'
+import '@/app/blog.css'
+
+import Image from 'next/image'
+import { getSingleBlog, getBlogs } from '@/app/utils/ghost'
+import { notFound } from 'next/navigation'
 import { formatDistance, subDays } from 'date-fns'
 import { tr } from 'date-fns/locale'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
 
+export async function generateStaticParams () {
+  const posts = await getBlogs()
+  return posts.map(post => ({
+    slug: post.slug
+  }))
+}
 export const revalidate = 10
 
-export default async function Page ({ params: { category } }) {
-  const blogs = await getBlogs(category)
+export default async function Pages ({ params }) {
+  const blog = await getSingleBlog(params.slug)
+  console.log(params)
+
+  if (!blog) {
+    notFound()
+  }
 
   return (
-    <section>
-      <div className='z-10 mb-12'>
-        <div className='relative w-full overflow-hidden -z-10 h-96'>
-          <Image
-            src={blogs[0].tags[0].feature_image}
-            fill
-            sizes='(max-width: 768px) 100vw,
-            (max-width: 1200px) 30vw, 20vw
-            (max-width: 1980px) 60vw, 50vw
-            '
-            className='object-cover object-center scale-110 blur-sm'
-            alt={`${blogs[0].tags[0].name}`}
-          />
+    <article className='z-10 max-w-4xl min-h-screen p-4 mx-auto space-y-8'>
+      <div className='my-8 md:my-16'>
+        <div className='max-w-3xl mx-auto space-y-6'>
+          <h1 className='pb-2 text-4xl font-black tracking-tight text-center text-transparent sm:text-6xl font-lato bg-clip-text bg-gradient-to-tr from-blue-950 to-blue-950'>
+            {blog.title}
+          </h1>
+          <p className='max-w-xl mx-auto text-center sm:text-lg text-slate-700'>
+            {blog.excerpt}
+          </p>
         </div>
-        <h1 className='z-20 max-w-xl px-12 py-8 mx-auto -mt-24 text-3xl font-black tracking-tight text-center bg-white/80 backdrop-blur-md rounded-t-xl md:max-w-2xl lg:max-w-3xl xs:text-4xl md:text-5xl lg:text-6xl font-lato'>
-          {blogs[0].tags[0].name}
-        </h1>
-      </div>
-      <div className='grid p-4  max-w-7xl grid-cols-[repeat(auto-fill,minmax(320px,1fr))] mx-auto gap-4'>
-        {blogs.map((blog, idx) => (
-          <div
-            key={idx}
-            className='flex flex-col max-w-xl gap-4 p-4 h-[36.7rem] sm:h-[37rem] md:h-[35rem] mx-auto transition-all bg-white border rounded-md sm:gap-5 md:max-w-none group hover:bg-slate-50 border-slate-200/80'
-          >
-            <div className='p-2 h-fit'>
-              <ImageBanner
-                image={blog.feature_image}
-                alt={blog.feature_image_alt}
-              />
-            </div>
-            <div className='flex flex-col h-full p-2'>
-              <div className='flex flex-col flex-1 space-y-3'>
-                <Link href={`/kategori/${category}/${blog.slug}`}>
-                  <h1 className='text-2xl font-black tracking-tight transition-all line-clamp-2 hover:decoration-blue-500 hover:text-blue-600 sm:text-3xl hover:underline underline-offset-2 font-lato decoration-black decoration-2 decoration-dashed hover:opacity-80 hover:transition-colors'>
-                    {blog.title}
-                  </h1>
-                </Link>
-                <p className='text-slate-600 line-clamp-3'>{blog.excerpt}</p>
-              </div>
-              <div className='flex flex-col items-start justify-end h-full'>
-                <div className='flex flex-wrap gap-4 mb-3'>
-                  {blog.tags.map((tag, idx) => (
-                    <div
-                      key={idx}
-                      className='px-4 py-2 bg-white border rounded-md border-slate-200/50 text-slate-800'
-                    >
-                      {tag.name}
-                    </div>
-                  ))}
-                </div>
-                <div className='text-slate-600/80 '>
-                  {formatDistance(
-                    subDays(new Date(blog.created_at), 0),
-                    new Date(),
-                    { addSuffix: true, locale: tr }
-                  )}{' '}
-                  paylaşıldı.
-                </div>
-              </div>
-            </div>
+        <div className='max-w-xl mx-auto h-[1px] w-full my-10 bg-slate-200'></div>
+        <div className='flex flex-col items-center justify-center tracking-tight text-slate-800'>
+          <div className='text-xl font-bold text-blue-950'>
+            Çetinkal Sigorta tarafından
           </div>
-        ))}
+          <div className='font-medium text-blue-500 mt-0.5'>
+            {formatDistance(subDays(new Date(blog.created_at), 0), new Date(), {
+              addSuffix: true,
+              locale: tr
+            })}{' '}
+            paylaşıldı.
+          </div>
+          <div className='relative w-full h-[30rem] mt-12'>
+            <Image
+              src={blog.feature_image}
+              fill
+              className='object-cover rounded-md'
+              alt={blog.feature_image_caption}
+            />
+          </div>
+        </div>
       </div>
-    </section>
+      <div
+        className='content'
+        dangerouslySetInnerHTML={{ __html: blog?.html }}
+      ></div>
+    </article>
   )
+}
+
+export async function generateMetadata ({ params: { slug } }) {
+  const metaData = await getSingleBlog(slug)
+
+  let tags = await metaData?.tags?.map(item => item.name)
+  return {
+    title: metaData?.title,
+    description: metaData?.excerpt,
+    keywords: tags,
+    url: metaData?.url.replace(
+      'api.sigortamglobal.com',
+      'akademi.sigortamglobal.com/blog'
+    ),
+    siteName: metaData?.title,
+    openGraph: {
+      title: metaData?.title,
+      description: metaData?.excerpt,
+      url: metaData?.url.replace(
+        'api.sigortamglobal.com',
+        'akademi.sigortamglobal.com/blog'
+      ),
+      keywords: tags,
+      images: [
+        {
+          url: metaData?.feature_image
+        }
+      ],
+      locale: 'tr_TR',
+      type: 'website'
+    }
+  }
 }
