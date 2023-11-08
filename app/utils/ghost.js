@@ -65,7 +65,7 @@ export async function getSitemapBlogs () {
   return await api.posts
     .browse({
       fields: 'slug,updated_at',
-      limit: 10
+      include: ['tags']
     })
     .catch(err => {
       throw new Error(err)
