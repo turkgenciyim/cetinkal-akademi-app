@@ -63,24 +63,24 @@ export default function RootLayout ({ children }) {
         <ScrollButton />
         <nav
           className='
-      flex items-center justify-center w-full z-20 gap-8 py-12 bg-blue-50/30 border-b border-slate-100 backdrop-blur-[1px]'
+      flex items-center justify-center w-full z-20 gap-8 py-12 bg-blue-50/30 border-b border-gray-100 backdrop-blur-[1px]'
         >
           <Link
             href={'/'}
-            className='flex items-center space-x-1 font-medium transition-colors hover:text-slate-800 text-slate-600'
+            className='flex items-center space-x-1 font-medium transition-colors hover:text-gray-800 text-gray-600'
           >
             <span>Anasayfa</span>
           </Link>
           <Link
             href={'https://www.cetinkalsigorta.com/hakkimizda'}
-            className='flex items-center space-x-1 font-medium transition-colors hover:text-slate-800 text-slate-600'
+            className='flex items-center space-x-1 font-medium transition-colors hover:text-gray-800 text-gray-600'
           >
             <span>Hakkımızda</span>
           </Link>
 
           <Link
             href={'https://www.cetinkalsigorta.com/iletisim'}
-            className='flex items-center space-x-1 font-medium transition-colors hover:text-slate-800 text-slate-600'
+            className='flex items-center space-x-1 font-medium transition-colors hover:text-gray-800 text-gray-600'
           >
             <span>İletişim</span>
           </Link>
@@ -97,7 +97,7 @@ export default function RootLayout ({ children }) {
                   </strong>
                 </h1>
 
-                <p className='mt-4 tracking-tight sm:text-xl/relaxed text-slate-700'>
+                <p className='mt-4 tracking-tight sm:text-xl/relaxed text-gray-700'>
                   Çetinkal Sigorta olarak Çetinkal Akademi sitemizde sadece
                   bilgilendirme amaçlı bloglar paylaşılmaktadır.
                 </p>

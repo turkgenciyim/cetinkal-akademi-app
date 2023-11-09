@@ -12,7 +12,7 @@ const api = new GhostContentAPI({
 export async function getCategories (category) {
   return await api.tags
     .browse({
-      order: 'slug ASC'
+      order: 'name ASC'
       // filter: `tags:[${category}]`
     })
     .catch(err => {

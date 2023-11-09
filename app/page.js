@@ -1,7 +1,7 @@
 import { getCategories } from './utils/ghost'
 import Link from 'next/link'
 import ImageBanner from './components/ImageBanner.component'
-
+import classnames from 'classnames'
 export const revalidate = 10
 export default async function Home () {
   const categories = await getCategories()
@@ -14,11 +14,20 @@ export default async function Home () {
         </span>{' '}
         hatırlatıyoruz.
       </h1>
-      <div className='grid max-w-7xl grid-cols-[repeat(auto-fill,minmax(320px,1fr))]  mx-auto gap-4'>
+      <div
+        className={classnames(
+          'grid max-w-7xl grid-cols-[repeat(auto-fit,minmax(270px,1fr))]  mx-auto gap-4'
+        )}
+      >
         {categories.map((category, idx) => (
           <div
             key={idx}
-            className='flex flex-col max-w-xl gap-4 p-4 mx-auto transition-all bg-white border rounded-md sm:gap-5 md:max-w-none group hover:bg-slate-50 border-slate-200/80'
+            className={classnames(
+              category.name.startsWith('!')
+                ? 'col-span-2 bg-blue-50 border-gray-200'
+                : 'bg-gray-50/50 hover:bg-gray-50 border-gray-200/80',
+              'flex flex-col max-w-xl gap-4 p-4 mx-auto transition-all border rounded-md sm:gap-5 md:max-w-none group'
+            )}
           >
             <div className='p-2 h-fit'>
               <ImageBanner
@@ -29,12 +38,18 @@ export default async function Home () {
             </div>
             <div className='flex flex-col h-full p-2'>
               <div className='flex flex-col flex-1 space-y-3'>
-                <Link href={`/kategori/${category.slug}`}>  
-                  <h1 className='text-2xl font-black tracking-tight transition-all line-clamp-2 hover:decoration-blue-500 hover:text-blue-600 sm:text-3xl hover:underline underline-offset-2 decoration-black decoration-2 decoration-dashed hover:opacity-80 hover:transition-colors'>
-                    {category.name}
+                <Link href={`/kategori/${category.slug}`}>
+                  <h1
+                    className={classnames(
+                      category.name.startsWith('!') &&
+                        '!text-3xl font-semibold tracking-tight transition-all line-clamp-2',
+                      'text-xl font-medium tracking-tight transition-all line-clamp-2 hover:decoration-blue-500 hover:text-blue-600 sm:text-2xl hover:underline underline-offset-2 decoration-black decoration-2 decoration-dashed hover:opacity-80 hover:transition-colors'
+                    )}
+                  >
+                    {category.name.replace('!', '')}
                   </h1>
                 </Link>
-                <p className='text-slate-600 line-clamp-3'>
+                <p className='text-gray-600 line-clamp-3'>
                   {category.description}
                 </p>
               </div>

@@ -16,7 +16,6 @@ export const revalidate = 10
 
 export default async function Pages ({ params }) {
   const blog = await getSingleBlog(params.slug)
-  console.log(params)
 
   if (!blog) {
     notFound()
@@ -29,12 +28,12 @@ export default async function Pages ({ params }) {
           <h1 className='pb-2 text-4xl font-black tracking-tight text-center text-transparent sm:text-6xl font-lato bg-clip-text bg-gradient-to-tr from-blue-950 to-blue-950'>
             {blog.title}
           </h1>
-          <p className='max-w-xl mx-auto text-center sm:text-lg text-slate-700'>
+          <p className='max-w-xl mx-auto text-center text-gray-700 sm:text-lg'>
             {blog.excerpt}
           </p>
         </div>
-        <div className='max-w-xl mx-auto h-[1px] w-full my-10 bg-slate-200'></div>
-        <div className='flex flex-col items-center justify-center tracking-tight text-slate-800'>
+        <div className='max-w-xl mx-auto h-[1px] w-full my-10 bg-gray-200'></div>
+        <div className='flex flex-col items-center justify-center tracking-tight text-gray-800'>
           <div className='text-xl font-bold text-blue-950'>
             Çetinkal Sigorta tarafından
           </div>
