@@ -111,7 +111,6 @@
   padding-left: 1.9em;
 }
 
-
 .gh-content hr {
   margin-top: 6vmin;
 }
@@ -628,4 +627,36 @@ a.gh-powered svg {
 
 .kg-file-card + .kg-file-card {
   margin-top: 1em;
+}
+
+.kg-button-card,
+.kg-button-card * {
+  box-sizing: border-box;
+}
+
+.kg-button-card {
+  display: flex;
+  position: static;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.kg-button-card.kg-align-left {
+  justify-content: flex-start;
+}
+
+.kg-button-card a.kg-btn {
+  display: flex;
+  position: static;
+  align-items: center;
+}
+
+.kg-button-card a.kg-btn:hover {
+  opacity: 0.85;
+}
+
+.kg-button-card a.kg-btn-accent {
+  @apply px-8 py-3 font-medium no-underline bg-blue-500 rounded-md hover:bg-blue-600;
+  color: #fff;
 }
