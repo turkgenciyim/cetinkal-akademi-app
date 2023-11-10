@@ -16,7 +16,8 @@ export async function getCategories (category) {
       // filter: `tags:[${category}]`
     })
     .catch(err => {
-      throw new Error(err)
+      console.log(err)
+      return null;
     })
 }
 
@@ -27,7 +28,8 @@ export async function getBlogsByTag (category) {
       // filter: `tags:[yangin-sigortasi]`
     })
     .catch(err => {
-      throw new Error(err)
+      console.log(err)
+      return null;
     })
 }
 export async function getBlogs (params) {
@@ -39,24 +41,20 @@ export async function getBlogs (params) {
       filter: `tags:[${params && params}]`
     })
     .catch(err => {
-      throw new Error(err)
+      console.log(err)
+      return null;
     })
 }
 
 // [blog] Get Single Blog
 export async function getSingleBlog (postSlug) {
   return await api.posts
-    .read(
-      {
-        slug: postSlug
-      },
-
-      {
-        include: ['tags', 'count.posts']
-      }
-    )
+    .read({
+      slug: postSlug
+    })
     .catch(err => {
-      console.error(err)
+      console.log(err)
+      return null;
     })
 }
 
@@ -68,6 +66,7 @@ export async function getSitemapBlogs () {
       include: ['tags']
     })
     .catch(err => {
-      throw new Error(err)
+      console.log(err)
+      return null;
     })
 }

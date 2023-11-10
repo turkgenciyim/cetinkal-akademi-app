@@ -2,6 +2,7 @@ import './globals.css'
 import { Lato, DM_Sans } from 'next/font/google'
 import ScrollButton from './ScrollButton'
 import Link from 'next/link'
+import Navigation from './components/Navigation.component'
 
 const lato = Lato({
   subsets: ['latin'],
@@ -61,30 +62,6 @@ export default function RootLayout ({ children }) {
       </head>
       <body className={`${dmSans.className} ${lato.variable}`}>
         <ScrollButton />
-        <nav
-          className='
-      flex items-center justify-center w-full z-20 gap-8 py-12 bg-blue-50/30 border-b border-gray-100 backdrop-blur-[1px]'
-        >
-          <Link
-            href={'/'}
-            className='flex items-center space-x-1 font-medium text-gray-600 transition-colors hover:text-gray-800'
-          >
-            <span>Anasayfa</span>
-          </Link>
-          <Link
-            href={'https://www.cetinkalsigorta.com/hakkimizda'}
-            className='flex items-center space-x-1 font-medium text-gray-600 transition-colors hover:text-gray-800'
-          >
-            <span>Hakkımızda</span>
-          </Link>
-
-          <Link
-            href={'https://www.cetinkalsigorta.com/iletisim'}
-            className='flex items-center space-x-1 font-medium text-gray-600 transition-colors hover:text-gray-800'
-          >
-            <span>İletişim</span>
-          </Link>
-        </nav>
         <main>{children}</main>
         <footer className='bg-gradient-to-t from-blue-200 via-sky-50 to-sky-50'>
           <div className='max-w-screen-xl px-4 py-32 mx-auto lg:flex lg:items-center'>
