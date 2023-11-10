@@ -27,7 +27,8 @@ export default async function Page ({ params: { category } }) {
       <div className='grid p-4  max-w-7xl grid-cols-[repeat(auto-fill,minmax(320px,1fr))] mx-auto gap-4'>
         <Suspense fallback={<CategoryLoading />}>
           {blogs.map((blog, idx) => (
-            <div
+            <Link
+              href={`/kategori/${category}/${blog.slug}`}
               key={idx}
               className='flex flex-col max-w-xl gap-4 p-4 h-[36.7rem] sm:h-[37rem] md:h-[34rem] mx-auto transition-all bg-white border rounded-md sm:gap-5 md:max-w-none group hover:bg-gray-50 border-gray-200/80'
             >
@@ -39,7 +40,7 @@ export default async function Page ({ params: { category } }) {
               </div>
               <div className='flex flex-col h-full p-2'>
                 <div className='flex flex-col flex-1 space-y-3'>
-                  <Link href={`/kategori/${category}/${blog.slug}`}>
+                  <div>
                     <h1
                       className={
                         'text-xl font-semibold line-clamp-2 hover:decoration-blue-500 hover:text-blue-600 sm:text-2xl hover:underline underline-offset-2 decoration-black decoration-2 decoration-dashed hover:opacity-80 hover:transition-colors'
@@ -47,7 +48,7 @@ export default async function Page ({ params: { category } }) {
                     >
                       {blog.title}
                     </h1>
-                  </Link>
+                  </div>
                   <p className='text-gray-600 line-clamp-3'>{blog.excerpt}</p>
                 </div>
                 <div className='flex flex-col items-start justify-end h-full'>
@@ -71,7 +72,7 @@ export default async function Page ({ params: { category } }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </Suspense>
       </div>

@@ -67,53 +67,51 @@ export default function RootLayout ({ children }) {
         >
           <Link
             href={'/'}
-            className='flex items-center space-x-1 font-medium transition-colors hover:text-gray-800 text-gray-600'
+            className='flex items-center space-x-1 font-medium text-gray-600 transition-colors hover:text-gray-800'
           >
             <span>Anasayfa</span>
           </Link>
           <Link
             href={'https://www.cetinkalsigorta.com/hakkimizda'}
-            className='flex items-center space-x-1 font-medium transition-colors hover:text-gray-800 text-gray-600'
+            className='flex items-center space-x-1 font-medium text-gray-600 transition-colors hover:text-gray-800'
           >
             <span>Hakkımızda</span>
           </Link>
 
           <Link
             href={'https://www.cetinkalsigorta.com/iletisim'}
-            className='flex items-center space-x-1 font-medium transition-colors hover:text-gray-800 text-gray-600'
+            className='flex items-center space-x-1 font-medium text-gray-600 transition-colors hover:text-gray-800'
           >
             <span>İletişim</span>
           </Link>
         </nav>
-        <main>
-          {children}
-          <div className='bg-gradient-to-t from-blue-900/20 via-white/40 to-sky-50/50'>
-            <div className='max-w-screen-xl px-4 py-32 mx-auto lg:flex lg:h-screen lg:items-center'>
-              <div className='max-w-xl mx-auto text-center'>
-                <h1 className='text-3xl font-semibold sm:text-5xl text-sky-950'>
-                  Lütfen unutmayın! Bu paylaşılan yazılardan Şirketimiz
-                  <strong className='font-extrabold tracking-tight text-blue-700 sm:block'>
-                    asla sorumlu değildir.
-                  </strong>
-                </h1>
+        <main>{children}</main>
+        <footer className='bg-gradient-to-t from-blue-200 via-sky-50 to-sky-50'>
+          <div className='max-w-screen-xl px-4 py-32 mx-auto lg:flex lg:items-center'>
+            <div className='max-w-2xl mx-auto text-center'>
+              <h1 className='text-3xl font-semibold tracking-tight sm:text-4xl text-sky-950'>
+                Bu paylaşılan yazılardan Şirketimiz
+                <strong className='font-extrabold tracking-tighter text-blue-500 sm:block'>
+                  sorumlu değildir.
+                </strong>
+              </h1>
 
-                <p className='mt-4 tracking-tight sm:text-xl/relaxed text-gray-700'>
-                  Çetinkal Sigorta olarak Çetinkal Akademi sitemizde sadece
-                  bilgilendirme amaçlı bloglar paylaşılmaktadır.
-                </p>
+              <p className='max-w-lg mx-auto mt-4 font-medium tracking-tight text-gray-800 sm:text-xl/relaxed'>
+                Çetinkal Sigorta olarak Çetinkal Akademi sitemizde sadece
+                bilgilendirme amaçlı bloglar paylaşılmaktadır.
+              </p>
 
-                <div className='flex flex-wrap justify-center gap-4 mt-8'>
-                  <a
-                    className='block w-full px-12 py-3 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-700 active:bg-blue-500 sm:w-auto'
-                    href='https://www.cetinkalsigorta.com/iletisim/'
-                  >
-                    İletişime Geç
-                  </a>
-                </div>
+              <div className='flex flex-wrap justify-center gap-4 mt-16'>
+                <a
+                  className='block w-full px-12 py-3 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-700 active:bg-blue-500 sm:w-auto'
+                  href='https://www.cetinkalsigorta.com/iletisim/'
+                >
+                  İletişime Geç
+                </a>
               </div>
             </div>
           </div>
-        </main>
+        </footer>
       </body>
     </html>
   )

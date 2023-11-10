@@ -11,7 +11,7 @@ const ScrollButton = () => {
         setShowTopBtn(false)
       }
     })
-  }, [])
+  }, [showTopBtn])
 
   const goToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })

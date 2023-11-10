@@ -17,7 +17,7 @@ const ImageBanner = ({ image, alt }) => {
             33vw'
         role='banner'
         className={`
-        duration-700 object-cover ease-in-out group-hover:opacity-75
+        duration-700 object-cover ease-out brightness-95 group-hover:brightness-105 group-hover:scale-105
         ${
           isLoading
             ? 'scale-110 blur-md grayscale'
