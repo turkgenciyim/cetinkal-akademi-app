@@ -43,7 +43,7 @@ export default async function Page ({ params: { category } }) {
           </h1>
 
           <a
-            href='/kategori'
+            href='/'
             className='px-8 py-2 transition-colors rounded-md text-rose-700 bg-rose-100 hover:bg-rose-200 '
           >
             Anasayfaya dön.
